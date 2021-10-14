@@ -5,8 +5,13 @@ import com.example.demo.dto.EmployeeDTO;
 import com.example.demo.model.Department;
 import com.example.demo.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -19,8 +24,9 @@ public class DepartmentController {
     private DepartmentRepository repository;
 
     @GetMapping("")
-    public List<DepartmentDTO> findAll() {
-        return repository.findAll().stream()
+    public List<DepartmentDTO> findAll(Principal principal) {
+        String user = principal.getName();
+        return repository.findAllByEmployeesName(user).stream()
                 .map((Department d) -> new DepartmentDTO(d, 1))
                 .toList();
     }

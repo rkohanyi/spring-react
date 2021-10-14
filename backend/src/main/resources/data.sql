@@ -9,7 +9,7 @@ INSERT INTO department VALUES
 (4, 'Tejtermekek');
 
 INSERT INTO employee VALUES
-(1, 'Laci'),
+(1, 'user'),
 (2, 'Mari'),
 (3, 'Piri'),
 (4, 'Pali');
